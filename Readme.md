@@ -33,6 +33,7 @@ O sistema realiza a leitura contínua de temperatura e executa ações baseadas 
 1. **Simulação:** O projeto foi validado no [Tinkercad](https://www.tinkercad.com/).[Desafio - Projeto Circuito Eletronico IoT](https://www.tinkercad.com/things/a9ToZcsjCwM-desafio-projeto-circuito-eletronico-iot-?sharecode=2V55rZjZYhB3szUTbKxeDMOoQMpdw0z0xBCQFy950CU) Importe o esquema elétrico e o código fornecido para testar as variações de temperatura.
 2. **Hardware:** Monte o circuito conforme a tabela de pinagem acima. Certifique-se de utilizar um transistor (como o TIP120) para o controle do motor se for implementar em hardware real, evitando sobrecarga no pino do Arduino.
 3. **Código:** Copie o código disponível em src/codigo.ino para a sua IDE Arduino, compile e carregue para a placa.
+4. **Assets:** Na pasta Assets, foram disponibilizados o circuito, a lista de materiais (BOM), e uma imagem do circuito.
 
 ## 💻 Código
 
