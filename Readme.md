@@ -30,23 +30,43 @@ O sistema realiza a leitura contínua de temperatura e executa ações baseadas 
 
 ## 🚀 Como Executar
 
-1. **Simulação:** O projeto foi validado no [Tinkercad](https://www.tinkercad.com/). Importe o esquema elétrico e o código fornecido para testar as variações de temperatura.
+1. **Simulação:** O projeto foi validado no [Tinkercad](https://www.tinkercad.com/).[Desafio - Projeto Circuito Eletronico IoT](https://www.tinkercad.com/things/a9ToZcsjCwM-desafio-projeto-circuito-eletronico-iot-?sharecode=2V55rZjZYhB3szUTbKxeDMOoQMpdw0z0xBCQFy950CU) Importe o esquema elétrico e o código fornecido para testar as variações de temperatura.
 2. **Hardware:** Monte o circuito conforme a tabela de pinagem acima. Certifique-se de utilizar um transistor (como o TIP120) para o controle do motor se for implementar em hardware real, evitando sobrecarga no pino do Arduino.
-3. **Código:** Copie o código disponível em src/main.cpp para a sua IDE Arduino, compile e carregue para a placa.
+3. **Código:** Copie o código disponível em src/codigo.ino para a sua IDE Arduino, compile e carregue para a placa.
 
 ## 💻 Código
 
 O código principal está localizado na pasta /src. Ele utiliza a lógica de monitoramento serial para facilitar o debug e ajuste dos limites de temperatura.
 
-```cpp
-// Trecho principal da lógica de controle
-if (temperatura >= 30.0) {
+```c++
+// Trecho Leitura Sensor
+//(a) Fazer a leitura da temperatura;
+  
+  // Leitura do sensor (fórmula para TMP36: voltagem -> graus Celsius)
+  int leitura = analogRead(pinoSensor);
+  float voltagem = leitura * (5.0 / 1023.0);
+  float temperatura = (voltagem - 0.5) * 100;
+
+  Serial.print("Temperatura: ");
+  Serial.println(temperatura);
+
+// Lógica de controle:
+  
+  // (b) Acionamento do motor se temperatura >= 30 °C
+  if (temperatura >= 30.0) {
     digitalWrite(pinoMotor, HIGH);
-}
-if (temperatura > 50.0) {
+  } else {
+    digitalWrite(pinoMotor, LOW);
+  }
+
+  // (c) Emergência se temperatura > 50 °C
+  if (temperatura > 50.0) {
     digitalWrite(pinoLed, HIGH);
-    tone(pinoBuzzer, 1000);
-}
+    tone(pinoBuzzer, 1000); // Emite som de 1000Hz
+  } else {
+    digitalWrite(pinoLed, LOW);
+    noTone(pinoBuzzer);     // Para o som
+  }
 
 ```
 
